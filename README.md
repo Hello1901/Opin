@@ -4,7 +4,7 @@
 
 A modern, real-time voting application built with vanilla JavaScript and Firebase. Create polls, share them with unique links, and visualize results with beautiful charts.
 
-**Live Demo:** [https://opin-voting.web.app](https://opin-voting.web.app)
+**Live SITE:** [https://opin-voting.web.app](https://opin-voting.web.app)
 
 ---
 
@@ -55,74 +55,7 @@ A modern, real-time voting application built with vanilla JavaScript and Firebas
 - **Hosting:** Firebase Hosting
 - **Charts:** Canvas API
 - **Excel Export:** SheetJS (xlsx)
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+
-- Firebase account
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/opin.git
-cd opin
-
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-### Deployment
-
-```bash
-# Build for production
-npm run build
-
-# Deploy to Firebase
-firebase deploy --only hosting
-```
-
----
-
-## 🔧 Firebase Setup
-
-1. Create a project at [Firebase Console](https://console.firebase.google.com)
-2. Enable **Email/Password** authentication
-3. Create a **Firestore Database**
-4. Add security rules (see `firestore.rules`)
-5. Update `src/firebase.js` with your config
-
----
-
-## 📁 Project Structure
-
-```
-opin/
-├── public/
-│   └── logo.png
-├── src/
-│   ├── main.js          # App entry point & UI logic
-│   ├── style.css        # Complete styling
-│   ├── firebase.js      # Firebase configuration
-│   ├── auth.js          # Authentication functions
-│   ├── opins.js         # Poll CRUD operations
-│   ├── voting.js        # Vote submission & tracking
-│   ├── graph.js         # Chart rendering & exports
-│   ├── notifications.js # Toast notification system
-│   └── loader.js        # Loading spinner overlay
-├── index.html
-├── package.json
-├── vite.config.js
-├── firebase.json
-└── .firebaserc
-```
-
+  
 ---
 
 ## 🎨 Color Palette
@@ -133,12 +66,6 @@ opin/
 | Dark Gray | `#222222` | Secondary background, cards |
 | Teal | `#1DCD9F` | Primary accent, buttons |
 | Dark Teal | `#169976` | Gradients, hover states |
-
----
-
-## 📄 License
-
-MIT License - feel free to use this project for personal or commercial purposes.
 
 ---
 
