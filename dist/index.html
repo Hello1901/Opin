@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Opin - Create and share polls with real-time results and analytics">
+  <title>Opin - Voting Made Simple</title>
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-DXgLH5_D.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DrMC9BGs.css">
+</head>
+<body>
+  <!-- Loader Overlay -->
+  <div id="loader-overlay" class="loader-overlay hidden">
+    <div class="custom-loader"></div>
+  </div>
+
+  <!-- Notification Container -->
+  <ul id="notification-container" class="notification-container"></ul>
+
+  <!-- Auth Section -->
+  <section id="auth-section" class="auth-section">
+    <div class="auth-container">
+      <div class="auth-header">
+        <img src="/logo.png" alt="Opin Logo" class="auth-logo">
+        <h1 class="auth-title">Opin</h1>
+        <p class="auth-subtitle">Voting Made Simple</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form">
+        <h2>Welcome Back</h2>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required placeholder="Enter your password">
+        </div>
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="keep-logged-in">
+          <label for="keep-logged-in">Keep me logged in</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <p class="auth-switch">Don't have an account? <a href="#" id="show-register">Register</a></p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form hidden">
+        <h2>Create Account</h2>
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="register-password">Password</label>
+          <input type="password" id="register-password" required placeholder="Create a password" minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="register-confirm">Confirm Password</label>
+          <input type="password" id="register-confirm" required placeholder="Confirm your password">
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <p class="auth-switch">Already have an account? <a href="#" id="show-login">Login</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Main Dashboard -->
+  <section id="main-section" class="main-section hidden">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-left">
+        <img src="/logo.png" alt="Opin Logo" class="header-logo">
+        <h1 class="header-title">Opin</h1>
+      </div>
+      <div class="header-right">
+        <button id="create-opin-btn" class="btn btn-primary">+ Create Opin</button>
+        <span id="user-email" class="user-email"></span>
+        <button id="logout-btn" class="btn btn-danger">Logout</button>
+      </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+      <!-- Active/Paused Opins -->
+      <section class="opins-section">
+        <h2>Active & Paused Opins</h2>
+        <div id="active-opins-list" class="opins-list">
+          <p class="empty-message">No active Opins yet. Create one to get started!</p>
+        </div>
+      </section>
+
+      <!-- Ended Opins -->
+      <section class="opins-section ended-section">
+        <h2>Ended Opins</h2>
+        <div id="ended-opins-list" class="opins-list">
+          <p class="empty-message">No ended Opins yet.</p>
+        </div>
+      </section>
+    </main>
+  </section>
+
+  <!-- Vote Section (for shared links) -->
+  <section id="vote-section" class="vote-section hidden">
+    <div class="vote-container">
+      <div class="vote-header">
+        <img src="/logo.png" alt="Opin Logo" class="vote-logo">
+        <h1 id="vote-title"></h1>
+        <p id="vote-question" class="vote-question"></p>
+        <p id="vote-status-message" class="vote-status-message"></p>
+      </div>
+      <form id="vote-form" class="vote-form">
+        <div id="vote-options" class="vote-options"></div>
+        <button type="submit" class="btn btn-primary btn-vote">Submit Vote</button>
+      </form>
+      <div id="already-voted-message" class="already-voted hidden">
+        <p>You have already voted on this Opin!</p>
+        <a href="/" class="btn btn-secondary">Go to Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create/Edit Opin Modal -->
+  <div id="create-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="close-create-modal">&times;</button>
+      <h2>Create New Opin</h2>
+      <form id="create-opin-form">
+        <div class="form-group">
+          <label for="opin-name">Name</label>
+          <input type="text" id="opin-name" required placeholder="Give your Opin a name">
+        </div>
+        <div class="form-group">
+          <label for="opin-expiration">Expiration Date & Time</label>
+          <input type="datetime-local" id="opin-expiration" required>
+        </div>
+        <div class="form-group">
+          <label for="opin-question">Question</label>
+          <textarea id="opin-question" required placeholder="What would you like to ask?"></textarea>
+        </div>
+        
+        <div class="form-group">
+          <label>Options (minimum 2)</label>
+          <div id="options-container">
+            <div class="option-row">
+              <input type="text" class="option-input" required placeholder="Option 1">
+            </div>
+            <div class="option-row">
+              <input type="text" class="option-input" required placeholder="Option 2">
+            </div>
+          </div>
+          <button type="button" id="add-option-btn" class="btn btn-secondary btn-small">+ Add Option</button>
+        </div>
+
+        <div class="form-group toggle-group">
+          <div class="toggle-row">
+            <label class="toggle-label">
+              <input type="checkbox" id="multi-select-toggle">
+              <span class="toggle-text">Multi-select</span>
+            </label>
+            <div id="max-selections-container" class="hidden">
+              <label for="max-selections">Max selections:</label>
+              <input type="number" id="max-selections" min="1" value="1">
+            </div>
+          </div>
+          <div class="toggle-row">
+            <label class="toggle-label">
+              <input type="checkbox" id="anonymous-toggle">
+              <span class="toggle-text">Anonymous votes</span>
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-publish">Publish Opin</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Share Link Modal -->
+  <div id="share-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-small">
+      <button class="modal-close" id="close-share-modal">&times;</button>
+      <h2>Share Opin</h2>
+      <p>Share this link with others to let them vote:</p>
+      <div class="share-link-container">
+        <input type="text" id="share-link-input" readonly>
+        <button id="copy-link-btn" class="btn btn-secondary">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graph Modal -->
+  <div id="graph-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content modal-large">
+      <button class="modal-close" id="close-graph-modal">&times;</button>
+      <h2 id="graph-title">Results</h2>
+      <div class="graph-container">
+        <canvas id="graph-canvas"></canvas>
+      </div>
+      <div id="voter-dropdowns" class="voter-dropdowns"></div>
+      <div id="graph-actions" class="graph-actions hidden">
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle">Download ▾</button>
+          <div class="dropdown-menu">
+            <button id="export-png" class="dropdown-item">PNG Image</button>
+            <button id="export-jpg" class="dropdown-item">JPG Image</button>
+            <button id="export-excel" class="dropdown-item">Excel (.xlsx)</button>
+            <button id="export-sheets" class="dropdown-item">Google Sheets</button>
+          </div>
+        </div>
+        <button id="share-graph-btn" class="btn btn-secondary">Share Graph</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
